@@ -1,0 +1,8 @@
+
+- Get the The Synthesis ToolKit in C++ (STK)
+  https://ccrma.stanford.edu/software/stk/
+
+- Get JUCE (http://www.juce.com/downloads) (MIDI support)
+  This is included as a submodule
+
+- Qt 5.2.1
