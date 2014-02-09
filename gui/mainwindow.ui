@@ -139,5 +139,59 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>button_on</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>turn_on()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>597</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>598</x>
+     <y>351</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>button_off</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>turn_off()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>662</x>
+     <y>306</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>662</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>line_freq</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>update_freq()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>488</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>488</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>turn_on()</slot>
+  <slot>turn_off()</slot>
+  <slot>update_freq()</slot>
+ </slots>
 </ui>
