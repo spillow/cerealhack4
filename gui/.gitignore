@@ -1,0 +1,5 @@
+Makefile
+cerealhackgui.app
+cerealhackgui.pro
+cerealhackgui.pro.*
+.qmake.stash
