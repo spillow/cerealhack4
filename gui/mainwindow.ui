@@ -289,8 +289,8 @@
    <slot>turn_on()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>597</x>
-     <y>306</y>
+     <x>607</x>
+     <y>378</y>
     </hint>
     <hint type="destinationlabel">
      <x>598</x>
@@ -305,8 +305,8 @@
    <slot>turn_off()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>662</x>
-     <y>306</y>
+     <x>671</x>
+     <y>378</y>
     </hint>
     <hint type="destinationlabel">
      <x>662</x>
@@ -321,12 +321,28 @@
    <slot>update_freq()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>488</x>
-     <y>261</y>
+     <x>671</x>
+     <y>332</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
      <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>groupBox_3</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>transpose_changed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>512</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>597</x>
+     <y>141</y>
     </hint>
    </hints>
   </connection>
@@ -335,5 +351,6 @@
   <slot>turn_on()</slot>
   <slot>turn_off()</slot>
   <slot>update_freq()</slot>
+  <slot>transpose_changed()</slot>
  </slots>
 </ui>
