@@ -1,3 +1,11 @@
 /gui/cerealhackgui.pro.user
 *.log
 *.status
+*.obj
+*.exe
+*.o
+*.a
+*.dll
+*.pdb
+*.ilk
+*.swp
