@@ -56,9 +56,7 @@
 namespace stk {
 
 StkFloat Stk :: srate_ = (StkFloat) SRATE;
-//std::string Stk :: rawwavepath_ = RAWWAVE_PATH;
-// CH_FIXME: why does RAWWAVE_PATH not work?
-std::string Stk :: rawwavepath_ = "../stk-4.4.4/rawwaves/";
+std::string Stk :: rawwavepath_ = RAWWAVE_PATH;
 const Stk::StkFormat Stk :: STK_SINT8   = 0x1;
 const Stk::StkFormat Stk :: STK_SINT16  = 0x2;
 const Stk::StkFormat Stk :: STK_SINT24  = 0x4;
