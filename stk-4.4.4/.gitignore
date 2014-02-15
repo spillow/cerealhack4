@@ -1,0 +1,7 @@
+projects/demo/Makefile
+projects/effects/Makefile
+projects/eguitar/Makefile
+projects/examples/Makefile
+projects/examples/libMakefile
+projects/ragamatic/Makefile
+src/Makefile

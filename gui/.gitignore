@@ -3,3 +3,6 @@ cerealhackgui.app
 cerealhackgui.pro
 cerealhackgui.pro.*
 .qmake.stash
+
+ui_mainwindow.h
+moc_mainwindow.cpp

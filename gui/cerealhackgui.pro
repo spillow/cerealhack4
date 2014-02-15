@@ -4,6 +4,9 @@
 #
 #-------------------------------------------------
 
+win32: CONFIG += win
+win64: CONFIG += win
+
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -14,13 +17,23 @@ TEMPLATE = app
 INCLUDEPATH += ../stk-4.4.4/include
 INCLUDEPATH += ../stk-4.4.4/src/include
 
-#DEFINES += HAVE_GETTIMEOFDAY
-DEFINES += __WINDOWS_DS__
-DEFINES += __WINDOWS_MM__
+DEFINES += HAVE_GETTIMEOFDAY
 DEFINES += LITTLE_ENDIAN
 DEFINES += RAWWAVE_PATH="\"../stk-4.4.4/rawwaves/\""
 
-LIBS += -lole32 -lwinmm -lWsock32 -ldsound -lwinmm #-lm
+win {
+    DEFINES += __WINDOWS_DS__
+    DEFINES += __WINDOWS_MM__
+
+    LIBS += -lole32 -lwinmm -lWsock32 -ldsound -lwinmm
+}
+
+macx {
+    DEFINES  += __MACOSX_CORE__
+
+    LIBS += -lpthread -lm -framework CoreAudio -framework CoreFoundation -framework CoreMidi
+}
+
 
 SOURCES += main.cpp\
            mainwindow.cpp\
