@@ -2,13 +2,9 @@
 #ifndef __HARDWARE_H_
 #define __HARDWARE_H_
 
-#include "RtAudio.h"
-
 class NoteId_;
 
 typedef NoteId_* NoteId;
-
-class State;
 
 class Hardware
 {

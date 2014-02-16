@@ -14,11 +14,13 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = cerealhackgui
 TEMPLATE = app
 
-STK_PATH = ../stk-4.4.4/
-HW_PATH  = ../hardware/
+STK_PATH    = ../stk-4.4.4/
+HW_PATH     = ../hardware/
+SHARED_PATH = ../shared/
 
 INCLUDEPATH += $${STK_PATH}/include
 INCLUDEPATH += $${STK_PATH}/src/include
+INCLUDEPATH += $${SHARED_PATH}
 
 INCLUDEPATH += $${HW_PATH}
 
@@ -44,6 +46,7 @@ macx {
 SOURCES += main.cpp\
            mainwindow.cpp\
            $${HW_PATH}/hardware.cpp\
+           $${SHARED_PATH}/shared.cpp\
         $${STK_PATH}/src/ADSR.cpp\
         $${STK_PATH}/src/Asymp.cpp\
         $${STK_PATH}/src/BandedWG.cpp\
@@ -136,6 +139,7 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h\
             $${HW_PATH}/hardware.h\
+            $${SHARED_PATH}/shared.h\
             $${STK_PATH}/src/include/asio.h\
             $${STK_PATH}/src/include/asiodrivers.h\
             $${STK_PATH}/src/include/asiodrvr.h\
