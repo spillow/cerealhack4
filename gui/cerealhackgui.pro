@@ -15,9 +15,12 @@ TARGET = cerealhackgui
 TEMPLATE = app
 
 STK_PATH = ../stk-4.4.4/
+HW_PATH  = ../hardware/
 
 INCLUDEPATH += $${STK_PATH}/include
 INCLUDEPATH += $${STK_PATH}/src/include
+
+INCLUDEPATH += $${HW_PATH}
 
 DEFINES += LITTLE_ENDIAN
 DEFINES += RAWWAVE_PATH="\\\"$${STK_PATH}/rawwaves/\\\""
@@ -40,6 +43,7 @@ macx {
 
 SOURCES += main.cpp\
            mainwindow.cpp\
+           $${HW_PATH}/hardware.cpp\
         $${STK_PATH}/src/ADSR.cpp\
         $${STK_PATH}/src/Asymp.cpp\
         $${STK_PATH}/src/BandedWG.cpp\
@@ -131,6 +135,7 @@ SOURCES += main.cpp\
         $${STK_PATH}/src/Wurley.cpp\
 
 HEADERS  += mainwindow.h\
+            $${HW_PATH}/hardware.h\
             $${STK_PATH}/src/include/asio.h\
             $${STK_PATH}/src/include/asiodrivers.h\
             $${STK_PATH}/src/include/asiodrvr.h\
