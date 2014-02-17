@@ -12,10 +12,13 @@
 #include "Flute.h"
 
 #include <assert.h>
-#include <set>
+#include <map>
 #include <list>
 
 using namespace stk;
+
+static const float c_SampleRate = 44100.0f;
+static const float c_ONE_OVER_128 = 1.0f / 128.0f;
 
 /////////////////////////////////////////////////////////////////////
 /// \brief The NoteMessage struct
@@ -31,6 +34,23 @@ struct NoteMessage
 };
 
 /////////////////////////////////////////////////////////////////////
+/// \brief The InstrumentState struct
+///
+/// Keeps track of the decay of a note after a note off event.
+///
+struct InstrumentState
+{
+    // has the note been released?
+    bool m_Decaying;
+    // number of samples that have passed since note release.
+    unsigned m_DecayTime;
+    InstrumentState() :
+        m_Decaying(false), m_DecayTime(0) {}
+};
+
+typedef std::map<Instrmnt*, InstrumentState> StatesType;
+
+/////////////////////////////////////////////////////////////////////
 /// \brief The State struct
 ///
 /// state of the hardware maintained between callback invocations.
@@ -39,9 +59,14 @@ struct NoteMessage
 ///
 struct State
 {
-    std::set<Instrmnt*> m_Instruments;
+    static const unsigned m_DecayTimeInSamples;
+    StatesType m_InstrumentStates;
     ConcurrentQueue<NoteMessage> m_Queue;
 };
+
+// We allow for a note to hold on for 0.2 sec after release at which
+// point it will be deleted.
+const unsigned State::m_DecayTimeInSamples = unsigned(0.2f * c_SampleRate);
 
 /////////////////////////////////////////////////////////////////////
 /// \brief The Hardware::HardwareImpl class
@@ -101,6 +126,8 @@ static int tick(void *outputBuffer,
     State *currState = static_cast<State*>(userState);
     StkFloat *out = static_cast<StkFloat*>(outputBuffer);
 
+    StatesType &instrumentMap = currState->m_InstrumentStates;
+
     // read from the message queue to determine if the
     // controller has requested a change in the state
     // of the hardware.
@@ -108,14 +135,13 @@ static int tick(void *outputBuffer,
         NoteMessage msg = currState->m_Queue.pop();
 
         if (msg.turnOn) {
-            currState->m_Instruments.insert(msg.instrument);
+            assert(instrumentMap.find(msg.instrument) == instrumentMap.end());
+            instrumentMap.insert(std::make_pair(msg.instrument, InstrumentState()));
         }
         else {
-            // TODO: what do we do to finish the off case?
-            /*
-            currState->m_Instruments.erase(msg.instrument);
-            delete msg.instrument;
-            */
+            auto iter = instrumentMap.find(msg.instrument);
+            assert(iter != instrumentMap.end());
+            iter->second.m_Decaying = true;
         }
     }
 
@@ -123,12 +149,33 @@ static int tick(void *outputBuffer,
     // fill up.  We're currently sampling at 44100 samples/sec.
     for (unsigned i=0; i < nBufferFrames; i++) {
         std::list<StkFloat> samples;
-        for (auto instrument : currState->m_Instruments) {
-            samples.push_back(instrument->tick());
+        for (auto &instrumentState : instrumentMap) {
+            samples.push_back(instrumentState.first->tick());
         }
 
         *out = MixSamples(samples);
         out++;
+    }
+
+    {
+        std::list<Instrmnt*> toRemove;
+        // bump decay counters for instruments
+        for (auto &instrumentState : instrumentMap) {
+            Instrmnt *instrument   = instrumentState.first;
+            InstrumentState &state = instrumentState.second;
+            if (state.m_Decaying) {
+                state.m_DecayTime += nBufferFrames;
+            }
+
+            if (state.m_DecayTime >= State::m_DecayTimeInSamples) {
+                toRemove.push_back(instrument);
+            }
+        }
+
+        for (auto item : toRemove) {
+            instrumentMap.erase(item);
+            delete item;
+        }
     }
 
     return 0;
@@ -205,7 +252,8 @@ void Hardware::HardwareImpl::NoteOff(NoteId id)
 {
     assert(id != NULL);
     Instrmnt *instrument = reinterpret_cast<Instrmnt*>(id);
-    instrument->noteOff(0.003f); // TODO: how sharp?
+    //instrument->noteOff(0.003f); // TODO: how sharp?
+    instrument->noteOff(0.4f * c_ONE_OVER_128); // TODO: how sharp?
     m_State.m_Queue.push(NoteMessage(false, instrument));
 }
 
@@ -227,7 +275,7 @@ Hardware::HardwareImpl::~HardwareImpl()
 ///
 bool Hardware::HardwareImpl::Initialize()
 {
-    Stk::setSampleRate(44100.0);
+    Stk::setSampleRate(c_SampleRate);
     // CH_TODO: what does this do?
     Stk::setRawwavePath(Stk::rawwavePath());
 
