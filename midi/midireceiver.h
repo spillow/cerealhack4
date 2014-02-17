@@ -12,7 +12,6 @@ class MidiReceiver
 public:
     struct CallbackInfo
     {
-        std::set<unsigned> m_InFlightNotes;
         Controller &m_Controller;
         CallbackInfo(Controller &controller) :
             m_Controller(controller) {}

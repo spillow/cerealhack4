@@ -16,13 +16,22 @@ void Controller::RunIteration()
 {
     while (!m_MidiQueue.empty()) {
         Controller::MidiEvent event = m_MidiQueue.pop();
+
+        // for debug
+        if (event.noteNumber == 0x60) {
+            throw 10;
+        }
+
         if (event.eventType == Controller::MidiEvent::NOTE_ON) {
             float frequency = 220.0f * pow(2.0, ((float)event.noteNumber - 57.0f) / 12.0f);
             m_InFlightNotes[event.noteNumber] = m_Hardware.NoteOn(Hardware::Clarinet, frequency, 0.1f);
         }
         else {
-            NoteId offId = m_InFlightNotes[event.noteNumber];
-            m_Hardware.NoteOff(offId);
+            auto iter = m_InFlightNotes.find(event.noteNumber);
+            if (iter != m_InFlightNotes.end()) {
+                m_Hardware.NoteOff(iter->second);
+                m_InFlightNotes.erase(iter);
+            }
         }
     }
 

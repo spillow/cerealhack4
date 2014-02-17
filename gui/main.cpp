@@ -16,7 +16,12 @@ int main(int argc, char *argv[])
     receiver.Initialize();
 
     while (1) {
-        controller.RunIteration();
+        try {
+            controller.RunIteration();
+        }
+        catch (...) {
+            break;
+        }
     }
 
     QApplication a(argc, argv);

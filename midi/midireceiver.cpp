@@ -40,6 +40,12 @@ static void ParseEvent(
     noteOn     = (upperNibble == c_NoteOnMidi);
     noteNumber = message[1] & 0x7F;
     velocity   = message[2] & 0x7F;
+
+    // some midi controllers send a note off as a note on
+    // with a velocity of zero.
+    if (noteOn && velocity == 0) {
+        noteOn = false;
+    }
 }
 
 void ReadMidiCallback(double deltatime,
@@ -60,18 +66,6 @@ void ReadMidiCallback(double deltatime,
     unsigned velocity   = 0;
 
     ParseEvent(*message, noteOn, noteNumber, velocity);
-
-    // some devices always send note on.  If you get a note on event with a note
-    // that is currently running, turn it to a note off.
-    if (noteOn) {
-        if (info.m_InFlightNotes.find(noteNumber) != info.m_InFlightNotes.end()) {
-            noteOn = false;
-            info.m_InFlightNotes.erase(noteNumber);
-        }
-        else {
-            info.m_InFlightNotes.insert(noteNumber);
-        }
-    }
 
     if (noteOn) {
         info.m_Controller.NoteOn(noteNumber, velocity);
