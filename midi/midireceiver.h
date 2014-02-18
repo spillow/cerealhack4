@@ -2,10 +2,10 @@
 #ifndef __MIDIRECEIVER_H_
 #define __MIDIRECEIVER_H_
 
-#include "controller.h"
 #include "RtMidi.h"
-
 #include <set>
+
+class Controller;
 
 class MidiReceiver
 {

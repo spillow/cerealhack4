@@ -7,13 +7,8 @@
 
 int main(int argc, char *argv[])
 {
-    Hardware hardware;
-    hardware.Initialize();
-
-    Controller controller(hardware);
-
-    MidiReceiver receiver(controller);
-    receiver.Initialize();
+    Controller controller;
+    controller.Initialize();
 
     while (1) {
         try {

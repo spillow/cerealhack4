@@ -4,6 +4,7 @@
 
 #include "shared.h"
 #include "hardware.h"
+#include "midireceiver.h"
 
 #include <map>
 
@@ -27,13 +28,15 @@ public:
 public:
     void NoteOn(unsigned noteNumber, unsigned velocity);
     void NoteOff(unsigned noteNumber, unsigned velocity);
-    Controller(Hardware &hardware);
     void RunIteration();
+    void Initialize();
+    Controller();
 private:
     std::map<unsigned, NoteId> m_InFlightNotes;
-    Hardware &m_Hardware;
     ConcurrentQueue<MidiEvent> m_MidiQueue;
     ConcurrentQueue<GuiEvent> m_GuiQueue;
+    Hardware m_Hardware;
+    MidiReceiver m_MidiReceiver;
 };
 
 #endif // __CONTROLLER_H_

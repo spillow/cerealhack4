@@ -2,6 +2,17 @@
 #include "controller.h"
 #include "shared.h"
 
+#include "Stk.h"
+
+Controller::Controller() :
+    m_MidiReceiver(*this) {}
+
+void Controller::Initialize()
+{
+    m_Hardware.Initialize();
+    m_MidiReceiver.Initialize();
+}
+
 void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 {
     m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_ON, noteNumber, velocity));
@@ -38,7 +49,7 @@ void Controller::RunIteration()
     while (!m_GuiQueue.empty()) {
         // TODO
     }
-}
 
-Controller::Controller(Hardware &hardware) :
-    m_Hardware(hardware) {}
+    // FIXME: remove when we have interrupt based trigger
+    stk::Stk::sleep(1);
+}
