@@ -31,7 +31,34 @@ public:
     void RunIteration();
     void Initialize();
     Controller();
+
+    ////////////////////////////////////////////////
+    //
+    // top level controls
+    //
+    // TODO: design question: do these take effect on currently
+    // ringing notes or on future notes?
+    //
+    void SetVoice(Hardware::Instrument instrument);
+    void SetSustain(bool sustain);
+    void SetIntonation(float centDeltas[12]);
+    // valid value range: [0.0f, 1.0f]
+    void SetVolumes(float volumes[12]);
+    void SetStandardPitch(float freq);
+    void SetTransposeAmount(int numSemitones);
 private:
+    float m_StandardPitchFreq;
+    bool m_IsSustained;
+    int m_TransposeAmount;
+    Hardware::Instrument m_CurrVoice;
+    // The convention here is:
+    // m_CentDeltasFromEqual[0] => C
+    // m_CentDeltasFromEqual[1] => C#
+    // ...
+    // m_CentDeltasFromEqual[11] => B
+    std::vector<float> m_CentDeltasFromEqual;
+    // same convention as m_CentDeltasFromEqual
+    std::vector<float> m_NoteVolumes;
     std::map<unsigned, NoteId> m_InFlightNotes;
     ConcurrentQueue<MidiEvent> m_MidiQueue;
     ConcurrentQueue<GuiEvent> m_GuiQueue;
