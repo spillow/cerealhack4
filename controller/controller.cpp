@@ -51,48 +51,104 @@ void Controller::Initialize()
 
 void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 {
-    m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_ON, noteNumber, velocity));
+    //m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_ON, noteNumber, velocity));
+    auto thunk = [=]() {
+        // for debug
+        if (noteNumber == 0x60) {
+            throw 10;
+        }
+        const float A4_Midi = 69.0f;
+        // TODO: what happens if we're in sustain and a note that is already
+        // sustained is hit again?
+        const int transposedNote = (int)noteNumber + m_TransposeAmount;
+        const unsigned noteIndex = GetNoteIndex(transposedNote);
+        float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
+        frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
+        m_InFlightNotes[noteNumber] = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]);
+    };
+
+    m_MsgQueue.push(thunk);
 }
 
 void Controller::NoteOff(unsigned noteNumber, unsigned velocity)
 {
-    m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_OFF, noteNumber, velocity));
+    //m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_OFF, noteNumber, velocity));
+    auto thunk = [=]() {
+        if (!m_IsSustained) {
+            auto iter = m_InFlightNotes.find(noteNumber);
+            if (iter != m_InFlightNotes.end()) {
+                m_Hardware.NoteOff(iter->second);
+                m_InFlightNotes.erase(iter);
+            }
+        }
+    };
+
+    m_MsgQueue.push(thunk);
+}
+
+void Controller::SetVoice(Hardware::Instrument instrument)
+{
+    auto thunk = [=]() {
+        m_CurrVoice = instrument;
+    };
+
+    m_MsgQueue.push(thunk);
+}
+
+void Controller::SetSustain(bool sustain)
+{
+    auto thunk = [=]() {
+        m_IsSustained = sustain;
+    };
+
+    m_MsgQueue.push(thunk);
+}
+
+void Controller::SetIntonation(float centDeltas[12])
+{
+    auto thunk = [=]() {
+        for (unsigned i=0; i < 12; i++) {
+            m_CentDeltasFromEqual[i] = centDeltas[i];
+        }
+    };
+
+    m_MsgQueue.push(thunk);
+}
+
+void Controller::SetVolumes(float volumes[12])
+{
+    auto thunk = [=]() {
+        for (unsigned i=0; i < 12; i++) {
+            m_NoteVolumes[i] = volumes[i];
+        }
+    };
+
+    m_MsgQueue.push(thunk);
+}
+
+void Controller::SetStandardPitch(float freq)
+{
+    auto thunk = [=]() {
+        m_StandardPitchFreq = freq;
+    };
+
+    m_MsgQueue.push(thunk);
+}
+
+void Controller::SetTransposeAmount(int numSemitones)
+{
+    auto thunk = [=]() {
+        m_TransposeAmount = numSemitones;
+    };
+
+    m_MsgQueue.push(thunk);
 }
 
 void Controller::RunIteration()
 {
-    const float A4_Midi = 69.0f;
-
-    while (!m_MidiQueue.empty()) {
-        Controller::MidiEvent event = m_MidiQueue.pop();
-
-        // for debug
-        if (event.noteNumber == 0x60) {
-            throw 10;
-        }
-
-        if (event.eventType == Controller::MidiEvent::NOTE_ON) {
-            // TODO: what happens if we're in sustain and a note that is already
-            // sustained is hit again?
-            const int transposedNote = (int)event.noteNumber + m_TransposeAmount;
-            const unsigned noteIndex = GetNoteIndex(transposedNote);
-            float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
-            frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
-            m_InFlightNotes[event.noteNumber] = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]);
-        }
-        else {
-            if (!m_IsSustained) {
-                auto iter = m_InFlightNotes.find(event.noteNumber);
-                if (iter != m_InFlightNotes.end()) {
-                    m_Hardware.NoteOff(iter->second);
-                    m_InFlightNotes.erase(iter);
-                }
-            }
-        }
-    }
-
-    while (!m_GuiQueue.empty()) {
-        // TODO
+    while (!m_MsgQueue.empty()) {
+        auto event = m_MsgQueue.pop();
+        event();
     }
 
     // FIXME: remove when we have interrupt based trigger
