@@ -43,15 +43,19 @@ Controller::Controller() :
 {
 }
 
-void Controller::Initialize()
+void Controller::GetMIDIPortInfo(MidiReceiver::PortInfo &info)
+{
+    m_MidiReceiver.GetMIDIPortInfo(info);
+}
+
+void Controller::Initialize(unsigned portNumber)
 {
     m_Hardware.Initialize();
-    m_MidiReceiver.Initialize();
+    m_MidiReceiver.Initialize(portNumber);
 }
 
 void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 {
-    //m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_ON, noteNumber, velocity));
     auto thunk = [=]() {
         // for debug
         if (noteNumber == 0x60) {
@@ -72,7 +76,6 @@ void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 
 void Controller::NoteOff(unsigned noteNumber, unsigned velocity)
 {
-    //m_MidiQueue.push(MidiEvent(Controller::MidiEvent::NOTE_OFF, noteNumber, velocity));
     auto thunk = [=]() {
         if (!m_IsSustained) {
             auto iter = m_InFlightNotes.find(noteNumber);

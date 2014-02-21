@@ -10,6 +10,9 @@
 #include "Instrmnt.h"
 #include "Clarinet.h"
 #include "Flute.h"
+#include "Brass.h"
+#include "Saxofony.h"
+#include "Bowed.h"
 
 #include <assert.h>
 #include <map>
@@ -220,6 +223,7 @@ void Hardware::NoteOff(NoteId id)
 NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float amplitude)
 {
     Instrmnt *i = NULL;
+    // TODO: where to turn the knobs on these?
     switch (instrument)
     {
     case Hardware::Clarinet:
@@ -228,7 +232,17 @@ NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float a
     case Hardware::Flute:
         i = new stk::Flute(10.0f);
         break;
+    case Hardware::Brass:
+        i = new stk::Brass();
+        break;
+    case Hardware::Saxofony:
+        i = new stk::Saxofony(10.0f);
+        break;
+    case Hardware::Bowed:
+        i = new stk::Bowed();
+        break;
     default:
+        assert(0 && "unknown instrument");
         return 0;
     }
 

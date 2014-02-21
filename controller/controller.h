@@ -9,13 +9,14 @@
 #include <functional>
 #include <map>
 
-class Controller
+class Controller final
 {
 public:
     void NoteOn(unsigned noteNumber, unsigned velocity);
     void NoteOff(unsigned noteNumber, unsigned velocity);
     void RunIteration();
-    void Initialize();
+    void GetMIDIPortInfo(MidiReceiver::PortInfo &info);
+    void Initialize(unsigned portNumber);
     Controller();
 
     ////////////////////////////////////////////////
@@ -49,6 +50,9 @@ private:
     ConcurrentQueue<std::function<void()> > m_MsgQueue;
     Hardware m_Hardware;
     MidiReceiver m_MidiReceiver;
+private:
+    Controller(const Controller &);
+    Controller& operator=(const Controller&);
 };
 
 #endif // __CONTROLLER_H_

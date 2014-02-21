@@ -4,11 +4,15 @@
 
 #include "RtMidi.h"
 #include <set>
+#include <list>
 
 class Controller;
 
 class MidiReceiver
 {
+public:
+    typedef std::list<std::pair<unsigned, std::string> > PortInfo;
+    void GetMIDIPortInfo(PortInfo &info);
 public:
     struct CallbackInfo
     {
@@ -16,7 +20,7 @@ public:
         CallbackInfo(Controller &controller) :
             m_Controller(controller) {}
     };
-    bool Initialize();
+    bool Initialize(unsigned portNumber);
     MidiReceiver(Controller &controller);
 private:
     CallbackInfo m_Info;

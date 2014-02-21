@@ -75,7 +75,22 @@ void ReadMidiCallback(double deltatime,
     }
 }
 
-bool MidiReceiver::Initialize()
+void MidiReceiver::GetMIDIPortInfo(PortInfo &info)
+{
+    // Check inputs.
+    const unsigned int numPorts = m_MidiIn.getPortCount();
+    for (unsigned int i=0; i < numPorts; i++) {
+        try {
+            const std::string portName = m_MidiIn.getPortName(i);
+            info.push_back(std::make_pair(i, portName));
+        }
+        catch (RtError &) {
+            // TODO: just move past this?
+        }
+    }
+}
+
+bool MidiReceiver::Initialize(unsigned portNumber)
 {
     // Check available ports.
     const unsigned int nPorts = m_MidiIn.getPortCount();
@@ -85,7 +100,7 @@ bool MidiReceiver::Initialize()
 
     try {
         // TODO: make this more general?
-        m_MidiIn.openPort(0);
+        m_MidiIn.openPort(portNumber);
     }
     catch (RtError&) {
         return false;

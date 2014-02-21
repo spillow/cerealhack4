@@ -6,14 +6,17 @@ class NoteId_;
 
 typedef NoteId_* NoteId;
 
-class Hardware
+class Hardware final
 {
     class HardwareImpl;
     HardwareImpl *m_HardwareImpl;
 public:
     enum Instrument {
         Clarinet,
-        Flute
+        Flute,
+        Brass,
+        Saxofony,
+        Bowed
     };
 public:
     Hardware();
@@ -21,6 +24,9 @@ public:
     bool Initialize();
     NoteId NoteOn(Instrument instrument, float freq, float amplitude);
     void NoteOff(NoteId id);
+private:
+    Hardware(const Hardware&);
+    Hardware& operator=(const Hardware&);
 };
 
 #endif // __HARDWARE_H_

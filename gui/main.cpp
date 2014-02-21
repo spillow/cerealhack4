@@ -1,14 +1,25 @@
 #include "mainwindow.h"
 #include <QApplication>
 
-#include "hardware.h"
 #include "controller.h"
-#include "midireceiver.h"
 
 int main(int argc, char *argv[])
 {
     Controller controller;
-    controller.Initialize();
+
+    MidiReceiver::PortInfo info;
+    controller.GetMIDIPortInfo(info);
+
+    if (info.empty()) {
+        printf("no MIDI devices available\n");
+        return 0;
+    }
+
+    for (auto &b : info) {
+        printf("(%d, %s)\n", b.first, b.second.c_str());
+    }
+
+    controller.Initialize(0);
 
     controller.SetVoice(Hardware::Flute);
     //controller.SetSustain(true);
