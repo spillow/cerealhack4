@@ -57,10 +57,6 @@ void Controller::Initialize(unsigned portNumber)
 void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 {
     auto thunk = [=]() {
-        // for debug
-        if (noteNumber == 0x60) {
-            throw 10;
-        }
         const float A4_Midi = 69.0f;
         // TODO: what happens if we're in sustain and a note that is already
         // sustained is hit again?

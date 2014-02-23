@@ -5,6 +5,7 @@
 
 int main(int argc, char *argv[])
 {
+#if 0
     Controller controller;
 
     MidiReceiver::PortInfo info;
@@ -38,7 +39,9 @@ int main(int argc, char *argv[])
     };
 
     controller.SetIntonation(centDeltas);
+#endif
 
+    /*
     while (1) {
         try {
             controller.RunIteration();
@@ -47,6 +50,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    */
 
     QApplication a(argc, argv);
     MainWindow w;
