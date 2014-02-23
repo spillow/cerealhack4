@@ -293,29 +293,39 @@ bool Hardware::HardwareImpl::Initialize()
     // CH_TODO: what does this do?
     Stk::setRawwavePath(Stk::rawwavePath());
 
+    const unsigned numDevices = m_DAC.getDeviceCount();
+
     // Setup the parameters
     RtAudio::StreamParameters parameters;
     // CH_TODO: what are the options here?
-    parameters.deviceId = m_DAC.getDefaultOutputDevice();
     parameters.nChannels = 1;
     const RtAudioFormat format = ( sizeof(StkFloat) == 8 ) ? RTAUDIO_FLOAT64 : RTAUDIO_FLOAT32;
     unsigned int bufferFrames = RT_BUFFER_SIZE;
 
-    try {
-      m_DAC.openStream(&parameters, NULL, format,
-                       (unsigned int)Stk::sampleRate(), &bufferFrames,
-                       tick, (void *)&m_State);
-    }
-    catch (RtError&) {
-        return false;
+    bool success = false;
+
+    for (unsigned i=0; i < numDevices; i++) {
+        parameters.deviceId = i;
+
+        try {
+            m_DAC.openStream(&parameters, NULL, format,
+                             (unsigned int)Stk::sampleRate(), &bufferFrames,
+                             tick, (void *)&m_State, NULL /*&options*/);
+        }
+        catch (RtError&) {
+            continue;
+        }
+
+        try {
+            m_DAC.startStream();
+        }
+        catch (RtError&) {
+            return false;
+        }
+
+        success = true;
+        break;
     }
 
-    try {
-      m_DAC.startStream();
-    }
-    catch (RtError&) {
-      return false;
-    }
-
-    return true;
+    return success;
 }

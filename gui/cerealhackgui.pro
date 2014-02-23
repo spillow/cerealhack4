@@ -31,12 +31,21 @@ INCLUDEPATH += $${HW_PATH}
 DEFINES += LITTLE_ENDIAN
 DEFINES += RAWWAVE_PATH="\\\"$${STK_PATH}/rawwaves/\\\""
 
+#USE_ASIO = 1
+
 win {
     # CH_FIXME: look into gettimeofday() equivalent for windows
     DEFINES += __WINDOWS_DS__
     DEFINES += __WINDOWS_MM__
+    !isEmpty(USE_ASIO) {
+        DEFINES += __WINDOWS_ASIO__
+        DEFINES -= UNICODE
+    }
 
     LIBS += -lole32 -lwinmm -lWsock32 -ldsound -lwinmm
+    !isEmpty(USE_ASIO) {
+        LIBS += -ladvapi32
+    }
 }
 
 macx {
@@ -141,7 +150,15 @@ SOURCES += main.cpp\
         $${STK_PATH}/src/Voicer.cpp\
         $${STK_PATH}/src/VoicForm.cpp\
         $${STK_PATH}/src/Whistle.cpp\
-        $${STK_PATH}/src/Wurley.cpp\
+        $${STK_PATH}/src/Wurley.cpp
+
+!isEmpty(USE_ASIO) {
+SOURCES += \
+        $${STK_PATH}/src/include/asio.cpp\
+        $${STK_PATH}/src/include/asiodrivers.cpp\
+        $${STK_PATH}/src/include/asiolist.cpp\
+        $${STK_PATH}/src/include/iasiothiscallresolver.cpp
+}
 
 HEADERS  += mainwindow.h\
             $${HW_PATH}/hardware.h\
