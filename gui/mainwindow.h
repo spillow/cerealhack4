@@ -23,10 +23,22 @@ private:
     QTimer m_ControllerTimer;
     Controller m_Controller;
 
+    int m_TransposeAmount;
+    int m_OctaveShift;
+
 private slots:
-  void turn_on(void);
-  void turn_off(void);
   void InvokeController(void);
+  void SetClarinetVoice();
+  void SetFluteVoice();
+  void SetBrassVoice();
+  void SetSaxVoice();
+  void SetBowedVoice();
+  void SetTransposeC();
+  void SetTransposeBFlat();
+  void SetTransposeEFlat();
+  void SetTransposeF();
+  void SetHoldNotes(int value);
+  void SetOctaveShift(int value);
 };
 
 #endif // MAINWINDOW_H

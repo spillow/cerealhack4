@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>557</height>
+    <width>704</width>
+    <height>710</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,19 +17,47 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Intonation Station</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>12</x>
       <y>0</y>
       <width>677</width>
-      <height>361</height>
+      <height>391</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="0" rowspan="3">
+      <widget class="QGroupBox" name="groupBox_4">
+       <property name="title">
+        <string>Temperament</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <widget class="QListWidget" name="list_temperment">
+          <item>
+           <property name="text">
+            <string>Equal</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Major</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Minor</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QGroupBox" name="groupBox_2">
        <property name="title">
@@ -37,30 +65,37 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QRadioButton" name="radio_instrument_one">
+         <widget class="QRadioButton" name="radio_clarinet_select">
           <property name="text">
-           <string>one</string>
+           <string>Clarinet</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radio_instrument_two">
+         <widget class="QRadioButton" name="radio_flute_select">
           <property name="text">
-           <string>two</string>
+           <string>Flute</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radio_instrument_three">
+         <widget class="QRadioButton" name="radio_brass_select">
           <property name="text">
-           <string>three</string>
+           <string>Brass</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="radio_instrument_four">
+         <widget class="QRadioButton" name="radio_sax_select">
           <property name="text">
-           <string>four</string>
+           <string>Sax</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="radio_bowed_select">
+          <property name="text">
+           <string>Bowed</string>
           </property>
          </widget>
         </item>
@@ -75,6 +110,9 @@
           <string>Transpose</string>
          </property>
          <layout class="QFormLayout" name="formLayout_2">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
           <item row="0" column="0" colspan="2">
            <widget class="QRadioButton" name="radio_transpose_c">
             <property name="text">
@@ -103,16 +141,6 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QRadioButton" name="radioButton">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
-          </item>
          </layout>
         </widget>
        </item>
@@ -126,7 +154,20 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spin_octave_shift"/>
+          <widget class="QSlider" name="slider_octave_shift">
+           <property name="minimum">
+            <number>-3</number>
+           </property>
+           <property name="maximum">
+            <number>3</number>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="tickPosition">
+            <enum>QSlider::TicksAbove</enum>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -145,106 +186,111 @@
        </property>
       </spacer>
      </item>
-     <item row="1" column="0" rowspan="2">
-      <widget class="QGroupBox" name="groupBox_4">
-       <property name="title">
-        <string>Temperment</string>
+     <item row="3" column="1">
+      <widget class="QCheckBox" name="checkbox_hold_notes">
+       <property name="text">
+        <string>Hold Notes</string>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QListWidget" name="list_temperment">
-          <item>
-           <property name="text">
-            <string>Equal</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Major</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Minor</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
       </widget>
      </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QGroupBox" name="groupBox">
-       <property name="title">
-        <string>Test</string>
+     <item row="2" column="1">
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Frequency:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="line_freq"/>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QPushButton" name="button_on">
-              <property name="text">
-               <string>On</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="button_off">
-              <property name="text">
-               <string>Off</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-       </layout>
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>681</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Note Controls</string>
+    </property>
+    <widget class="QWidget" name="gridLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>661</width>
+       <height>231</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>200</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>C</string>
+        </property>
+        <widget class="QSlider" name="verticalSlider">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>20</y>
+           <width>22</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="QSlider" name="verticalSlider_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>120</y>
+           <width>22</width>
+           <height>51</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>190</y>
+           <width>21</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>80</y>
+           <width>21</width>
+           <height>20</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -252,17 +298,23 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>702</width>
-     <height>22</height>
+     <width>704</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCereal_Hack_2014">
     <property name="title">
-     <string>Cereal Hack 2014</string>
+     <string>File</string>
     </property>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+   </widget>
    <addaction name="menuCereal_Hack_2014"/>
+   <addaction name="menuAbout"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -275,7 +327,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuit">
    <property name="text">
-    <string>Quit Cereal Hack 2014</string>
+    <string>Open Preset...</string>
    </property>
   </action>
  </widget>
@@ -283,74 +335,193 @@
  <resources/>
  <connections>
   <connection>
-   <sender>button_on</sender>
+   <sender>radio_clarinet_select</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>turn_on()</slot>
+   <slot>SetClarinetVoice()</slot>
    <hints>
     <hint type="sourcelabel">
+     <x>150</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_flute_select</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetFluteVoice()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>379</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_brass_select</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetBrassVoice()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>379</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_sax_select</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetSaxVoice()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>61</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>384</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_bowed_select</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetBowedVoice()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>80</x>
+     <y>163</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>373</x>
+     <y>410</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_transpose_c</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetTransposeC()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>605</x>
+     <y>45</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_transpose_bf</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetTransposeBFlat()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>602</x>
+     <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_transpose_ef</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetTransposeEFlat()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>601</x>
+     <y>131</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_transpose_f</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetTransposeF()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>602</x>
+     <y>174</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkbox_hold_notes</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetHoldNotes(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>419</y>
+    </hint>
+    <hint type="destinationlabel">
      <x>607</x>
-     <y>378</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>598</x>
-     <y>351</y>
+     <y>385</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>button_off</sender>
-   <signal>clicked()</signal>
+   <sender>slider_octave_shift</sender>
+   <signal>sliderMoved(int)</signal>
    <receiver>MainWindow</receiver>
-   <slot>turn_off()</slot>
+   <slot>SetOctaveShift(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>671</x>
-     <y>378</y>
+     <x>425</x>
+     <y>310</y>
     </hint>
     <hint type="destinationlabel">
-     <x>662</x>
-     <y>360</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>line_freq</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>update_freq()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>671</x>
-     <y>332</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>488</x>
-     <y>335</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>groupBox_3</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>transpose_changed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>512</x>
-     <y>127</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>597</x>
-     <y>141</y>
+     <x>579</x>
+     <y>273</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
-  <slot>turn_on()</slot>
-  <slot>turn_off()</slot>
-  <slot>update_freq()</slot>
-  <slot>transpose_changed()</slot>
+  <slot>SetClarinetVoice()</slot>
+  <slot>SetFluteVoice()</slot>
+  <slot>SetBrassVoice()</slot>
+  <slot>SetSaxVoice()</slot>
+  <slot>SetBowedVoice()</slot>
+  <slot>SetTransposeC()</slot>
+  <slot>SetTransposeBFlat()</slot>
+  <slot>SetTransposeEFlat()</slot>
+  <slot>SetTransposeF()</slot>
+  <slot>SetHoldNotes(int)</slot>
+  <slot>SetOctaveShift(int)</slot>
  </slots>
 </ui>

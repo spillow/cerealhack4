@@ -55,7 +55,6 @@ macx {
     LIBS += -lpthread -lm -framework CoreAudio -framework CoreFoundation -framework CoreMidi
 }
 
-
 SOURCES += main.cpp\
            mainwindow.cpp\
            $${HW_PATH}/hardware.cpp\

@@ -3,7 +3,9 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    m_TransposeAmount(0),
+    m_OctaveShift(0)
 {
     m_Controller.Initialize(0);
 
@@ -11,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(&m_ControllerTimer,
                      SIGNAL(timeout()), this,
                      SLOT(InvokeController()));
+
+    ui->radio_clarinet_select->setChecked(true);
+    ui->radio_transpose_c->setChecked(true);
 
     m_ControllerTimer.start(1);
 }
@@ -26,14 +31,67 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::turn_on(void)
+void MainWindow::SetClarinetVoice()
 {
-  ui->button_on->setDown(true);
-  ui->button_off->setDown(false);
+    m_Controller.SetVoice(Hardware::Clarinet);
 }
 
-void MainWindow::turn_off(void)
+void MainWindow::SetFluteVoice()
 {
-  ui->button_on->setDown(false);
-  ui->button_off->setDown(true);
+    m_Controller.SetVoice(Hardware::Flute);
+}
+
+void MainWindow::SetBrassVoice()
+{
+    m_Controller.SetVoice(Hardware::Brass);
+}
+
+void MainWindow::SetSaxVoice()
+{
+    m_Controller.SetVoice(Hardware::Saxofony);
+}
+
+void MainWindow::SetBowedVoice()
+{
+    m_Controller.SetVoice(Hardware::Bowed);
+}
+
+void MainWindow::SetTransposeC()
+{
+    m_TransposeAmount = 0;
+    int amount = m_OctaveShift*12 + m_TransposeAmount;
+    m_Controller.SetTransposeAmount(amount);
+}
+
+void MainWindow::SetTransposeBFlat()
+{
+    m_TransposeAmount = -2;
+    int amount = m_OctaveShift*12 + m_TransposeAmount;
+    m_Controller.SetTransposeAmount(amount);
+}
+
+void MainWindow::SetTransposeEFlat()
+{
+    m_TransposeAmount = +3;
+    int amount = m_OctaveShift*12 + m_TransposeAmount;
+    m_Controller.SetTransposeAmount(amount);
+}
+
+void MainWindow::SetTransposeF()
+{
+    m_TransposeAmount = +5;
+    int amount = m_OctaveShift*12 + m_TransposeAmount;
+    m_Controller.SetTransposeAmount(amount);
+}
+
+void MainWindow::SetHoldNotes(int value)
+{
+    m_Controller.SetSustain(value);
+}
+
+void MainWindow::SetOctaveShift(int value)
+{
+    m_OctaveShift = value;
+    int amount = m_OctaveShift*12 + m_TransposeAmount;
+    m_Controller.SetTransposeAmount(amount);
 }
