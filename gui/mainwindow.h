@@ -39,6 +39,7 @@ private slots:
   void SetTransposeF();
   void SetHoldNotes(int value);
   void SetOctaveShift(int value);
+  void SetReferencePitch();
 };
 
 #endif // MAINWINDOW_H

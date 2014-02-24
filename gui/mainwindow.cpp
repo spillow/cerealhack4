@@ -59,7 +59,7 @@ void MainWindow::SetBowedVoice()
 
 void MainWindow::SetTransposeC()
 {
-    m_TransposeAmount = 0;
+    m_TransposeAmount = +0;
     int amount = m_OctaveShift*12 + m_TransposeAmount;
     m_Controller.SetTransposeAmount(amount);
 }
@@ -95,4 +95,15 @@ void MainWindow::SetOctaveShift(int value)
     m_OctaveShift = value;
     int amount = m_OctaveShift*12 + m_TransposeAmount;
     m_Controller.SetTransposeAmount(amount);
+}
+
+void MainWindow::SetReferencePitch()
+{
+    // TODO: sanitize the input.
+    QString freqStr = ui->lineEdit_reference_pitch->displayText();
+    bool ok;
+    const float freq = freqStr.toFloat(&ok);
+    if (ok) {
+        m_Controller.SetStandardPitch(freq);
+    }
 }
