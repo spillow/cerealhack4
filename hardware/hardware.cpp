@@ -14,6 +14,8 @@
 #include "Saxofony.h"
 #include "Bowed.h"
 
+#include "SKINI.msg"
+
 #include <assert.h>
 #include <map>
 #include <list>
@@ -228,18 +230,23 @@ NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float a
     {
     case Hardware::Clarinet:
         i = new stk::Clarinet(10.0f);
+        static_cast<stk::Clarinet*>(i)->controlChange(__SK_ModWheel_, 0);
         break;
     case Hardware::Flute:
         i = new stk::Flute(10.0f);
+        static_cast<stk::Flute*>(i)->controlChange(__SK_ModWheel_, 0);
         break;
     case Hardware::Brass:
         i = new stk::Brass();
+        static_cast<stk::Brass*>(i)->controlChange(__SK_ModWheel_, 0);
         break;
     case Hardware::Saxofony:
         i = new stk::Saxofony(10.0f);
+        static_cast<stk::Saxofony*>(i)->controlChange(__SK_ModWheel_, 0);
         break;
     case Hardware::Bowed:
         i = new stk::Bowed();
+        static_cast<stk::Bowed*>(i)->controlChange(__SK_ModWheel_, 0);
         break;
     default:
         assert(0 && "unknown instrument");

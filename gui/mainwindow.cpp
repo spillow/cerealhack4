@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->radio_clarinet_select->setChecked(true);
     ui->radio_transpose_c->setChecked(true);
+    ui->checkbox_hold_notes->setChecked(false);
 
     m_ControllerTimer.start(1);
 }
