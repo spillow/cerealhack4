@@ -64,7 +64,8 @@ void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
         const unsigned noteIndex = GetNoteIndex(transposedNote);
         float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
         frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
-        m_InFlightNotes[noteNumber] = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]);
+        m_InFlightNotes[noteNumber].push(
+            m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]));
     };
 
     m_MsgQueue.push(thunk);
@@ -74,10 +75,11 @@ void Controller::NoteOff(unsigned noteNumber, unsigned velocity)
 {
     auto thunk = [=]() {
         if (!m_IsSustained) {
-            auto iter = m_InFlightNotes.find(noteNumber);
-            if (iter != m_InFlightNotes.end()) {
-                m_Hardware.NoteOff(iter->second);
-                m_InFlightNotes.erase(iter);
+            auto &ringingNotes = m_InFlightNotes[noteNumber];
+            if (!ringingNotes.empty()) {
+                auto &noteId = ringingNotes.top();
+                ringingNotes.pop();
+                m_Hardware.NoteOff(noteId);
             }
         }
     };

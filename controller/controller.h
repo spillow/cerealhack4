@@ -8,6 +8,7 @@
 
 #include <functional>
 #include <map>
+#include <stack>
 
 class Controller final
 {
@@ -46,7 +47,7 @@ private:
     std::vector<float> m_CentDeltasFromEqual;
     // same convention as m_CentDeltasFromEqual
     std::vector<float> m_NoteVolumes;
-    std::map<unsigned, NoteId> m_InFlightNotes;
+    std::map<unsigned, std::stack<NoteId> > m_InFlightNotes;
     ConcurrentQueue<std::function<void()> > m_MsgQueue;
     Hardware m_Hardware;
     MidiReceiver m_MidiReceiver;
