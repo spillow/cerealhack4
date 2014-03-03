@@ -64,8 +64,9 @@ void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
         const unsigned noteIndex = GetNoteIndex(transposedNote);
         float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
         frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
-        m_InFlightNotes[noteNumber].push(
-            m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]));
+        NoteId noteId = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]);
+        m_RingingNotes[noteNumber].push(noteId);
+        m_PushedDownNotes[noteNumber]++;
     };
 
     m_MsgQueue.push(thunk);
@@ -74,8 +75,13 @@ void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 void Controller::NoteOff(unsigned noteNumber, unsigned velocity)
 {
     auto thunk = [=]() {
+        auto &pushedNotes = m_PushedDownNotes[noteNumber];
+        if (pushedNotes > 0) {
+            pushedNotes--;
+        }
+
         if (!m_IsSustained) {
-            auto &ringingNotes = m_InFlightNotes[noteNumber];
+            auto &ringingNotes = m_RingingNotes[noteNumber];
             if (!ringingNotes.empty()) {
                 auto &noteId = ringingNotes.top();
                 ringingNotes.pop();
@@ -100,6 +106,17 @@ void Controller::SetSustain(bool sustain)
 {
     auto thunk = [=]() {
         m_IsSustained = sustain;
+
+        if (sustain == false) {
+            for (auto &kv : m_RingingNotes) {
+                NoteCollection &coll = kv.second;
+                const unsigned noteNumber  = kv.first;
+                const unsigned numSustained = coll.size() - m_PushedDownNotes[noteNumber];
+                for (unsigned i=0; i < numSustained; i++) {
+                    NoteOff(noteNumber, 0);
+                }
+            }
+        }
     };
 
     m_MsgQueue.push(thunk);

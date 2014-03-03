@@ -47,7 +47,11 @@ private:
     std::vector<float> m_CentDeltasFromEqual;
     // same convention as m_CentDeltasFromEqual
     std::vector<float> m_NoteVolumes;
-    std::map<unsigned, std::stack<NoteId> > m_InFlightNotes;
+    typedef std::stack<NoteId> NoteCollection;
+    // Notes currently making sound.
+    std::map<unsigned, NoteCollection> m_RingingNotes;
+    // Notes that are being held (no note off event yet)
+    std::map<unsigned, unsigned> m_PushedDownNotes;
     ConcurrentQueue<std::function<void()> > m_MsgQueue;
     Hardware m_Hardware;
     MidiReceiver m_MidiReceiver;
