@@ -26,6 +26,8 @@ private:
     int m_TransposeAmount;
     int m_OctaveShift;
 
+    std::vector<float> m_CentDeltas;
+
 private slots:
   void InvokeController(void);
   void SetClarinetVoice();
@@ -40,6 +42,7 @@ private slots:
   void SetHoldNotes(int value);
   void SetOctaveShift(int value);
   void SetReferencePitch();
+  void SetCentDeltas();
 };
 
 #endif // MAINWINDOW_H

@@ -16,6 +16,18 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>706</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>706</width>
+    <height>720</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Intonation Station</string>
   </property>
@@ -32,7 +44,7 @@
       <x>12</x>
       <y>0</y>
       <width>677</width>
-      <height>391</height>
+      <height>418</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
@@ -187,6 +199,18 @@
         </item>
         <item>
          <widget class="QListWidget" name="listWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
           <item>
            <property name="text">
             <string>Major</string>
@@ -201,19 +225,176 @@
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox_30">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>150</height>
+           </size>
+          </property>
           <property name="title">
            <string>Key</string>
           </property>
-          <widget class="QWidget" name="horizontalLayoutWidget">
+          <widget class="QRadioButton" name="radioButton">
            <property name="geometry">
             <rect>
-             <x>0</x>
-             <y>10</y>
-             <width>31</width>
-             <height>61</height>
+             <x>10</x>
+             <y>20</y>
+             <width>82</width>
+             <height>17</height>
             </rect>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout"/>
+           <property name="text">
+            <string>C</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_2">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>C♯</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_3">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>D</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_4">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>D♯</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_5">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>100</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>E</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_6">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>F</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_7">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>20</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>F♯</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_8">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>40</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>G</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_9">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>60</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>G#</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_10">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>80</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>A</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_11">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>100</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>A♯</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="radioButton_12">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>120</y>
+             <width>82</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>B</string>
+           </property>
           </widget>
          </widget>
         </item>
@@ -273,7 +454,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>400</y>
+      <y>410</y>
       <width>681</width>
       <height>131</height>
      </rect>
@@ -308,7 +489,7 @@
         <property name="title">
          <string>F♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_6">
+        <widget class="QLineEdit" name="lineEdit_Pitch_Fs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -321,7 +502,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_6">
+        <widget class="QSlider" name="verticalSlider_Pitch_Fs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -329,6 +510,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -353,7 +540,7 @@
         <property name="title">
          <string>D♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_4">
+        <widget class="QLineEdit" name="lineEdit_Pitch_Ds">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -366,7 +553,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_4">
+        <widget class="QSlider" name="verticalSlider_Pitch_Ds">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -374,6 +561,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -398,7 +591,7 @@
         <property name="title">
          <string>D</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_3">
+        <widget class="QLineEdit" name="lineEdit_Pitch_D">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -411,7 +604,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_3">
+        <widget class="QSlider" name="verticalSlider_Pitch_D">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -419,6 +612,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -443,7 +642,7 @@
         <property name="title">
          <string>E</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_5">
+        <widget class="QLineEdit" name="lineEdit_Pitch_E">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -456,7 +655,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_5">
+        <widget class="QSlider" name="verticalSlider_Pitch_E">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -464,6 +663,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -488,7 +693,7 @@
         <property name="title">
          <string>C♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="lineEdit_Pitch_Cs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -501,7 +706,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_2">
+        <widget class="QSlider" name="verticalSlider_Pitch_Cs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -509,6 +714,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -533,7 +744,7 @@
         <property name="title">
          <string>G</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_7">
+        <widget class="QLineEdit" name="lineEdit_Pitch_G">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -546,7 +757,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_7">
+        <widget class="QSlider" name="verticalSlider_Pitch_G">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -554,6 +765,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -578,7 +795,7 @@
         <property name="title">
          <string>B</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_9">
+        <widget class="QLineEdit" name="lineEdit_Pitch_B">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -591,7 +808,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_9">
+        <widget class="QSlider" name="verticalSlider_Pitch_B">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -599,6 +816,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -623,7 +846,7 @@
         <property name="title">
          <string>A</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_8">
+        <widget class="QLineEdit" name="lineEdit_Pitch_A">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -636,7 +859,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_8">
+        <widget class="QSlider" name="verticalSlider_Pitch_A">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -644,6 +867,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -668,7 +897,7 @@
         <property name="title">
          <string>F</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_10">
+        <widget class="QLineEdit" name="lineEdit_Pitch_F">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -681,7 +910,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_10">
+        <widget class="QSlider" name="verticalSlider_Pitch_F">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -689,6 +918,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -713,7 +948,7 @@
         <property name="title">
          <string>G♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_11">
+        <widget class="QLineEdit" name="lineEdit_Pitch_Gs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -726,7 +961,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_11">
+        <widget class="QSlider" name="verticalSlider_Pitch_Gs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -734,6 +969,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -758,7 +999,7 @@
         <property name="title">
          <string>C</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="lineEdit_Pitch_C">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -771,7 +1012,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider">
+        <widget class="QSlider" name="verticalSlider_Pitch_C">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -779,6 +1020,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -803,7 +1050,7 @@
         <property name="title">
          <string>A♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_12">
+        <widget class="QLineEdit" name="lineEdit_Pitch_As">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -816,7 +1063,7 @@
           <string>0.0</string>
          </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_12">
+        <widget class="QSlider" name="verticalSlider_Pitch_As">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -824,6 +1071,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="minimum">
+          <number>-70</number>
+         </property>
+         <property name="maximum">
+          <number>70</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -838,7 +1091,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>530</y>
+      <y>540</y>
       <width>681</width>
       <height>131</height>
      </rect>
@@ -873,7 +1126,7 @@
         <property name="title">
          <string>F♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_13">
+        <widget class="QLineEdit" name="lineEdit_Volume_Fs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -882,8 +1135,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_13">
+        <widget class="QSlider" name="verticalSlider_Volume_Fs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -891,6 +1147,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -915,7 +1177,7 @@
         <property name="title">
          <string>D♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_14">
+        <widget class="QLineEdit" name="lineEdit_Volume_Ds">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -924,8 +1186,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_14">
+        <widget class="QSlider" name="verticalSlider_Volume_Ds">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -933,6 +1198,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -957,7 +1228,7 @@
         <property name="title">
          <string>D</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_15">
+        <widget class="QLineEdit" name="lineEdit_Volume_D">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -966,8 +1237,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_15">
+        <widget class="QSlider" name="verticalSlider_Volume_D">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -975,6 +1249,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -999,7 +1279,7 @@
         <property name="title">
          <string>E</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_16">
+        <widget class="QLineEdit" name="lineEdit_Volume_E">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1008,8 +1288,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_16">
+        <widget class="QSlider" name="verticalSlider_Volume_E">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1017,6 +1300,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1041,7 +1330,7 @@
         <property name="title">
          <string>C♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_17">
+        <widget class="QLineEdit" name="lineEdit_Volume_Cs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1050,8 +1339,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_17">
+        <widget class="QSlider" name="verticalSlider_Volume_Cs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1059,6 +1351,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1083,7 +1381,7 @@
         <property name="title">
          <string>G</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_18">
+        <widget class="QLineEdit" name="lineEdit_Volume_G">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1092,8 +1390,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_18">
+        <widget class="QSlider" name="verticalSlider_Volume_G">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1101,6 +1402,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1125,7 +1432,7 @@
         <property name="title">
          <string>B</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_19">
+        <widget class="QLineEdit" name="lineEdit_Volume_B">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1134,8 +1441,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_19">
+        <widget class="QSlider" name="verticalSlider_Volume_B">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1143,6 +1453,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1167,7 +1483,7 @@
         <property name="title">
          <string>A</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_20">
+        <widget class="QLineEdit" name="lineEdit_Volume_A">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1176,8 +1492,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_20">
+        <widget class="QSlider" name="verticalSlider_Volume_A">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1185,6 +1504,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1209,7 +1534,7 @@
         <property name="title">
          <string>F</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_21">
+        <widget class="QLineEdit" name="lineEdit_Volume_F">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1218,8 +1543,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_21">
+        <widget class="QSlider" name="verticalSlider_Volume_F">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1227,6 +1555,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1251,7 +1585,7 @@
         <property name="title">
          <string>G♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_22">
+        <widget class="QLineEdit" name="lineEdit_Volume_Gs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1260,8 +1594,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_22">
+        <widget class="QSlider" name="verticalSlider_Volume_Gs">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1269,6 +1606,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1293,7 +1636,7 @@
         <property name="title">
          <string>C</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_23">
+        <widget class="QLineEdit" name="lineEdit_Volume_C">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1302,8 +1645,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_23">
+        <widget class="QSlider" name="verticalSlider_Volume_C">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1311,6 +1657,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1335,7 +1687,7 @@
         <property name="title">
          <string>A♯</string>
         </property>
-        <widget class="QLineEdit" name="lineEdit_24">
+        <widget class="QLineEdit" name="lineEdit_Volume_As">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1344,8 +1696,11 @@
            <height>21</height>
           </rect>
          </property>
+         <property name="text">
+          <string>5.0</string>
+         </property>
         </widget>
-        <widget class="QSlider" name="verticalSlider_24">
+        <widget class="QSlider" name="verticalSlider_Volume_As">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -1353,6 +1708,12 @@
            <width>31</width>
            <height>61</height>
           </rect>
+         </property>
+         <property name="maximum">
+          <number>10</number>
+         </property>
+         <property name="value">
+          <number>5</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1588,12 +1949,204 @@
    <slot>SetReferencePitch()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>65</x>
-     <y>394</y>
+     <x>66</x>
+     <y>429</y>
     </hint>
     <hint type="destinationlabel">
      <x>259</x>
      <y>406</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_C</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>193</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_Cs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>99</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>441</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_D</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>154</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_Ds</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>207</x>
+     <y>544</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>407</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_E</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>269</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>426</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_F</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>545</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>482</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_Fs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>386</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>600</x>
+     <y>417</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_G</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>437</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>494</x>
+     <y>378</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_Gs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>499</x>
+     <y>544</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>587</x>
+     <y>398</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_A</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>545</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>562</x>
+     <y>405</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_As</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>602</x>
+     <y>545</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>688</x>
+     <y>405</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Pitch_B</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>653</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>664</x>
+     <y>427</y>
     </hint>
    </hints>
   </connection>
@@ -1611,5 +2164,6 @@
   <slot>SetHoldNotes(int)</slot>
   <slot>SetOctaveShift(int)</slot>
   <slot>SetReferencePitch()</slot>
+  <slot>SetCentDeltas()</slot>
  </slots>
 </ui>

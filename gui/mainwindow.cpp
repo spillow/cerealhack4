@@ -5,7 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_TransposeAmount(0),
-    m_OctaveShift(0)
+    m_OctaveShift(0),
+    m_CentDeltas(std::vector<float>(12, 0.f))
 {
     m_Controller.Initialize(0);
 
@@ -107,3 +108,34 @@ void MainWindow::SetReferencePitch()
         m_Controller.SetStandardPitch(freq);
     }
 }
+
+void MainWindow::SetCentDeltas()
+{
+    QLineEdit* pitchBoxes[] = {
+        ui->lineEdit_Pitch_C,
+        ui->lineEdit_Pitch_Cs,
+        ui->lineEdit_Pitch_D,
+        ui->lineEdit_Pitch_Ds,
+        ui->lineEdit_Pitch_E,
+        ui->lineEdit_Pitch_F,
+        ui->lineEdit_Pitch_Fs,
+        ui->lineEdit_Pitch_G,
+        ui->lineEdit_Pitch_Gs,
+        ui->lineEdit_Pitch_A,
+        ui->lineEdit_Pitch_As,
+        ui->lineEdit_Pitch_B
+    };
+
+    for (unsigned i=0; i < sizeof(pitchBoxes) / sizeof(pitchBoxes[0]); i++) {
+        // TODO: sanitize the input.
+        QString deltaStr = pitchBoxes[i]->displayText();
+        bool ok;
+        const float delta = deltaStr.toFloat(&ok);
+        if (ok) {
+            m_CentDeltas[i] = delta;
+        }
+    }
+
+    m_Controller.SetIntonation(&m_CentDeltas[0]);
+}
+
