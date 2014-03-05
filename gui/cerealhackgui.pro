@@ -31,6 +31,8 @@ INCLUDEPATH += $${HW_PATH}
 DEFINES += LITTLE_ENDIAN
 DEFINES += RAWWAVE_PATH="\\\"$${STK_PATH}/rawwaves/\\\""
 
+CONFIG += c++11
+
 #USE_ASIO = 1
 
 win {

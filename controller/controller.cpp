@@ -1,3 +1,4 @@
+#include <math.h>
 
 #include "controller.h"
 #include "shared.h"
