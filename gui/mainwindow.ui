@@ -460,7 +460,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Pitch Controls</string>
+     <string>Pitch Controls (¢ from equal)</string>
     </property>
     <widget class="QWidget" name="gridLayoutWidget">
      <property name="geometry">
@@ -512,10 +512,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -563,10 +563,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -614,10 +614,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -665,10 +665,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -716,10 +716,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -767,10 +767,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -818,10 +818,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -869,10 +869,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -920,10 +920,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -971,10 +971,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1022,10 +1022,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1073,10 +1073,10 @@
           </rect>
          </property>
          <property name="minimum">
-          <number>-70</number>
+          <number>-700</number>
          </property>
          <property name="maximum">
-          <number>70</number>
+          <number>700</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2150,6 +2150,198 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_C</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>42</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>181</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_Cs</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>489</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_D</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>166</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>119</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_Ds</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>223</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>326</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_E</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>279</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>131</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_F</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>233</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_Fs</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>491</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>222</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_G</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>442</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>253</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_Gs</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>486</x>
+     <y>491</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>232</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_A</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>551</x>
+     <y>492</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>231</x>
+     <y>318</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_As</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>606</x>
+     <y>490</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>343</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Pitch_B</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetCentDeltaText(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>659</x>
+     <y>488</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>232</x>
+     <y>170</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>SetClarinetVoice()</slot>
@@ -2165,5 +2357,6 @@
   <slot>SetOctaveShift(int)</slot>
   <slot>SetReferencePitch()</slot>
   <slot>SetCentDeltas()</slot>
+  <slot>SetCentDeltaText(int)</slot>
  </slots>
 </ui>

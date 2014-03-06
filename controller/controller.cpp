@@ -39,7 +39,7 @@ Controller::Controller() :
     m_MidiReceiver(*this), m_TransposeAmount(0), m_IsSustained(false),
     m_StandardPitchFreq(440.0f),
     m_CentDeltasFromEqual(std::vector<float>(12, 0.0f)),
-    m_NoteVolumes(std::vector<float>(12, 0.1f)),
+    m_NoteVolumeScaler(std::vector<float>(12, 1.0f)),
     m_CurrVoice(Hardware::Clarinet)
 {
 }
@@ -65,7 +65,7 @@ void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
         const unsigned noteIndex = GetNoteIndex(transposedNote);
         float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
         frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
-        NoteId noteId = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumes[noteIndex]);
+        NoteId noteId = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumeScaler[noteIndex]);
         m_RingingNotes[noteNumber].push(noteId);
         m_PushedDownNotes[noteNumber]++;
     };
@@ -138,7 +138,7 @@ void Controller::SetVolumes(float volumes[12])
 {
     auto thunk = [=]() {
         for (unsigned i=0; i < 12; i++) {
-            m_NoteVolumes[i] = volumes[i];
+            m_NoteVolumeScaler[i] = volumes[i];
         }
     };
 

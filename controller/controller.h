@@ -46,7 +46,7 @@ private:
     // m_CentDeltasFromEqual[11] => B
     std::vector<float> m_CentDeltasFromEqual;
     // same convention as m_CentDeltasFromEqual
-    std::vector<float> m_NoteVolumes;
+    std::vector<float> m_NoteVolumeScaler;
     typedef std::stack<NoteId> NoteCollection;
     // Notes currently making sound.
     std::map<unsigned, NoteCollection> m_RingingNotes;

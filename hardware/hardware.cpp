@@ -34,8 +34,9 @@ struct NoteMessage
 {
     bool turnOn;
     Instrmnt *instrument;
-    NoteMessage(bool turnOn, Instrmnt *instrument) :
-        turnOn(turnOn), instrument(instrument) {}
+    float volumeScaler;
+    NoteMessage(bool turnOn, Instrmnt *instrument, float volumeScaler) :
+        turnOn(turnOn), instrument(instrument), volumeScaler(volumeScaler) {}
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -49,8 +50,9 @@ struct InstrumentState
     bool m_Decaying;
     // number of samples that have passed since note release.
     unsigned m_DecayTime;
-    InstrumentState() :
-        m_Decaying(false), m_DecayTime(0) {}
+    float m_volumeScaler;
+    InstrumentState(float volumeScaler) :
+        m_Decaying(false), m_DecayTime(0), m_volumeScaler(volumeScaler) {}
 };
 
 typedef std::map<Instrmnt*, InstrumentState> StatesType;
@@ -141,7 +143,7 @@ static int tick(void *outputBuffer,
 
         if (msg.turnOn) {
             assert(instrumentMap.find(msg.instrument) == instrumentMap.end());
-            instrumentMap.insert(std::make_pair(msg.instrument, InstrumentState()));
+            instrumentMap.insert(std::make_pair(msg.instrument, InstrumentState(msg.volumeScaler)));
         }
         else {
             auto iter = instrumentMap.find(msg.instrument);
@@ -154,8 +156,10 @@ static int tick(void *outputBuffer,
     // fill up.  We're currently sampling at 44100 samples/sec.
     for (unsigned i=0; i < nBufferFrames; i++) {
         std::list<StkFloat> samples;
-        for (auto &instrumentState : instrumentMap) {
-            samples.push_back(instrumentState.first->tick());
+        for (auto &pair: instrumentMap) {
+            Instrmnt *instrmnt = pair.first;
+            const InstrumentState &instrumentState = pair.second;
+            samples.push_back(instrmnt->tick() * instrumentState.m_volumeScaler);
         }
 
         *out = MixSamples(samples);
@@ -201,9 +205,9 @@ bool Hardware::Initialize()
     return m_HardwareImpl->Initialize();
 }
 
-NoteId Hardware::NoteOn(Instrument i, float freq, float amplitude)
+NoteId Hardware::NoteOn(Instrument i, float freq, float volumeScaler)
 {
-    return m_HardwareImpl->NoteOn(i, freq, amplitude);
+    return m_HardwareImpl->NoteOn(i, freq, volumeScaler);
 }
 
 void Hardware::NoteOff(NoteId id)
@@ -215,14 +219,14 @@ void Hardware::NoteOff(NoteId id)
 /// \brief Hardware::HardwareImpl::NoteOn
 /// \param instrument
 /// \param freq
-/// \param amplitude
+/// \param volumeScaler
 /// \return
 ///
 /// Called from the controller thread.
 /// Creates a new note and fires off a message to the audio thread
 /// to add the note into the mix.
 ///
-NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float amplitude)
+NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float volumeScaler)
 {
     Instrmnt *i = NULL;
     // TODO: where to turn the knobs on these?
@@ -254,10 +258,10 @@ NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float a
     }
 
     // start the physical process.
-    i->noteOn(freq, amplitude);
+    i->noteOn(freq, 0.1f); // default amplitude of all instruments.
 
     // notify audio thread to pick new note up.
-    m_State.m_Queue.push(NoteMessage(true, i));
+    m_State.m_Queue.push(NoteMessage(true, i, volumeScaler));
 
     // Send a pointer back to the caller of the generated object.
     // This is used as a unique tag to reference it for deletion
@@ -275,7 +279,7 @@ void Hardware::HardwareImpl::NoteOff(NoteId id)
     Instrmnt *instrument = reinterpret_cast<Instrmnt*>(id);
     //instrument->noteOff(0.003f); // TODO: how sharp?
     instrument->noteOff(0.4f * c_ONE_OVER_128); // TODO: how sharp?
-    m_State.m_Queue.push(NoteMessage(false, instrument));
+    m_State.m_Queue.push(NoteMessage(false, instrument, 0.0f));
 }
 
 /////////////////////////////////////////////////////////////////////

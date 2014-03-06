@@ -43,6 +43,7 @@ private slots:
   void SetOctaveShift(int value);
   void SetReferencePitch();
   void SetCentDeltas();
+  void SetCentDeltaText(int value);
 };
 
 #endif // MAINWINDOW_H

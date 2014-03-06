@@ -109,6 +109,58 @@ void MainWindow::SetReferencePitch()
     }
 }
 
+static float clamp(float val, float max, float min)
+{
+    if (val > max) {
+        return max;
+    }
+    else if (val < min) {
+        return min;
+    }
+
+    return val;
+}
+
+void MainWindow::SetCentDeltaText(int /*value*/)
+{
+    QLineEdit* pitchBoxes[] = {
+        ui->lineEdit_Pitch_C,
+        ui->lineEdit_Pitch_Cs,
+        ui->lineEdit_Pitch_D,
+        ui->lineEdit_Pitch_Ds,
+        ui->lineEdit_Pitch_E,
+        ui->lineEdit_Pitch_F,
+        ui->lineEdit_Pitch_Fs,
+        ui->lineEdit_Pitch_G,
+        ui->lineEdit_Pitch_Gs,
+        ui->lineEdit_Pitch_A,
+        ui->lineEdit_Pitch_As,
+        ui->lineEdit_Pitch_B
+    };
+
+    QSlider* verticalSliders[] = {
+        ui->verticalSlider_Pitch_C,
+        ui->verticalSlider_Pitch_Cs,
+        ui->verticalSlider_Pitch_D,
+        ui->verticalSlider_Pitch_Ds,
+        ui->verticalSlider_Pitch_E,
+        ui->verticalSlider_Pitch_F,
+        ui->verticalSlider_Pitch_Fs,
+        ui->verticalSlider_Pitch_G,
+        ui->verticalSlider_Pitch_Gs,
+        ui->verticalSlider_Pitch_A,
+        ui->verticalSlider_Pitch_As,
+        ui->verticalSlider_Pitch_B
+    };
+
+    for (unsigned i=0; i < sizeof(pitchBoxes) / sizeof(pitchBoxes[0]); i++) {
+        const float value = float(verticalSliders[i]->value()) / 10.0f;
+        pitchBoxes[i]->setText(QString::number(value));
+    }
+
+    SetCentDeltas();
+}
+
 void MainWindow::SetCentDeltas()
 {
     QLineEdit* pitchBoxes[] = {
@@ -126,14 +178,34 @@ void MainWindow::SetCentDeltas()
         ui->lineEdit_Pitch_B
     };
 
+    QSlider* verticalSliders[] = {
+        ui->verticalSlider_Pitch_C,
+        ui->verticalSlider_Pitch_Cs,
+        ui->verticalSlider_Pitch_D,
+        ui->verticalSlider_Pitch_Ds,
+        ui->verticalSlider_Pitch_E,
+        ui->verticalSlider_Pitch_F,
+        ui->verticalSlider_Pitch_Fs,
+        ui->verticalSlider_Pitch_G,
+        ui->verticalSlider_Pitch_Gs,
+        ui->verticalSlider_Pitch_A,
+        ui->verticalSlider_Pitch_As,
+        ui->verticalSlider_Pitch_B
+    };
+
     for (unsigned i=0; i < sizeof(pitchBoxes) / sizeof(pitchBoxes[0]); i++) {
-        // TODO: sanitize the input.
         QString deltaStr = pitchBoxes[i]->displayText();
         bool ok;
         const float delta = deltaStr.toFloat(&ok);
         if (ok) {
-            m_CentDeltas[i] = delta;
+            const int maxValue = verticalSliders[i]->maximum();
+            const int minValue = verticalSliders[i]->minimum();
+            const float clampedDelta = clamp(delta, float(maxValue) / 10.0f, float(minValue) / 10.0f);
+            m_CentDeltas[i] = clampedDelta;
+            verticalSliders[i]->setValue(int(clampedDelta * 10.0f));
         }
+        // TODO: format this so it always has one decimal place.
+        pitchBoxes[i]->setText(QString::number(m_CentDeltas[i]));
     }
 
     m_Controller.SetIntonation(&m_CentDeltas[0]);
