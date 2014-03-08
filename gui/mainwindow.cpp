@@ -6,7 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_TransposeAmount(0),
     m_OctaveShift(0),
-    m_CentDeltas(std::vector<float>(12, 0.f))
+    m_CentDeltas(std::vector<float>(12, 0.f)),
+    m_Volumes(std::vector<float>(12, 1.f))
 {
     m_Controller.Initialize(0);
 
@@ -121,6 +122,8 @@ static float clamp(float val, float max, float min)
     return val;
 }
 
+#define ArraySize(x) (sizeof(x) / sizeof(x[0]))
+
 void MainWindow::SetCentDeltaText(int /*value*/)
 {
     QLineEdit* pitchBoxes[] = {
@@ -153,7 +156,7 @@ void MainWindow::SetCentDeltaText(int /*value*/)
         ui->verticalSlider_Pitch_B
     };
 
-    for (unsigned i=0; i < sizeof(pitchBoxes) / sizeof(pitchBoxes[0]); i++) {
+    for (unsigned i=0; i < ArraySize(pitchBoxes); i++) {
         const float value = float(verticalSliders[i]->value()) / 10.0f;
         pitchBoxes[i]->setText(QString::number(value));
     }
@@ -211,3 +214,92 @@ void MainWindow::SetCentDeltas()
     m_Controller.SetIntonation(&m_CentDeltas[0]);
 }
 
+void MainWindow::SetVolumeSlider(int /*value*/)
+{
+    QLineEdit* pitchBoxes[] = {
+        ui->lineEdit_Volume_C,
+        ui->lineEdit_Volume_Cs,
+        ui->lineEdit_Volume_D,
+        ui->lineEdit_Volume_Ds,
+        ui->lineEdit_Volume_E,
+        ui->lineEdit_Volume_F,
+        ui->lineEdit_Volume_Fs,
+        ui->lineEdit_Volume_G,
+        ui->lineEdit_Volume_Gs,
+        ui->lineEdit_Volume_A,
+        ui->lineEdit_Volume_As,
+        ui->lineEdit_Volume_B
+    };
+
+    QSlider* verticalSliders[] = {
+        ui->verticalSlider_Volume_C,
+        ui->verticalSlider_Volume_Cs,
+        ui->verticalSlider_Volume_D,
+        ui->verticalSlider_Volume_Ds,
+        ui->verticalSlider_Volume_E,
+        ui->verticalSlider_Volume_F,
+        ui->verticalSlider_Volume_Fs,
+        ui->verticalSlider_Volume_G,
+        ui->verticalSlider_Volume_Gs,
+        ui->verticalSlider_Volume_A,
+        ui->verticalSlider_Volume_As,
+        ui->verticalSlider_Volume_B
+    };
+
+    for (unsigned i=0; i < ArraySize(pitchBoxes); i++) {
+        const float value = float(verticalSliders[i]->value());
+        pitchBoxes[i]->setText(QString::number(value));
+    }
+
+    SetVolumeLineEdit();
+}
+
+void MainWindow::SetVolumeLineEdit()
+{
+    QLineEdit* pitchBoxes[] = {
+        ui->lineEdit_Volume_C,
+        ui->lineEdit_Volume_Cs,
+        ui->lineEdit_Volume_D,
+        ui->lineEdit_Volume_Ds,
+        ui->lineEdit_Volume_E,
+        ui->lineEdit_Volume_F,
+        ui->lineEdit_Volume_Fs,
+        ui->lineEdit_Volume_G,
+        ui->lineEdit_Volume_Gs,
+        ui->lineEdit_Volume_A,
+        ui->lineEdit_Volume_As,
+        ui->lineEdit_Volume_B
+    };
+
+    QSlider* verticalSliders[] = {
+        ui->verticalSlider_Volume_C,
+        ui->verticalSlider_Volume_Cs,
+        ui->verticalSlider_Volume_D,
+        ui->verticalSlider_Volume_Ds,
+        ui->verticalSlider_Volume_E,
+        ui->verticalSlider_Volume_F,
+        ui->verticalSlider_Volume_Fs,
+        ui->verticalSlider_Volume_G,
+        ui->verticalSlider_Volume_Gs,
+        ui->verticalSlider_Volume_A,
+        ui->verticalSlider_Volume_As,
+        ui->verticalSlider_Volume_B
+    };
+
+    for (unsigned i=0; i < ArraySize(pitchBoxes); i++) {
+        QString deltaStr = pitchBoxes[i]->displayText();
+        bool ok;
+        const float delta = deltaStr.toFloat(&ok);
+        if (ok) {
+            const int maxValue = verticalSliders[i]->maximum();
+            const int minValue = verticalSliders[i]->minimum();
+            const float clampedDelta = clamp(delta, float(maxValue), float(minValue));
+            m_Volumes[i] = clampedDelta;
+            verticalSliders[i]->setValue(int(clampedDelta));
+        }
+        // TODO: format this so it always has one decimal place.
+        pitchBoxes[i]->setText(QString::number(m_Volumes[i]));
+    }
+
+    m_Controller.SetVolumes(&m_Volumes[0]);
+}

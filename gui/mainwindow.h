@@ -27,6 +27,7 @@ private:
     int m_OctaveShift;
 
     std::vector<float> m_CentDeltas;
+    std::vector<float> m_Volumes;
 
 private slots:
   void InvokeController(void);
@@ -44,6 +45,8 @@ private slots:
   void SetReferencePitch();
   void SetCentDeltas();
   void SetCentDeltaText(int value);
+  void SetVolumeLineEdit();
+  void SetVolumeSlider(int value);
 };
 
 #endif // MAINWINDOW_H

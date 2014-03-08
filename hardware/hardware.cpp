@@ -71,9 +71,9 @@ struct State
     ConcurrentQueue<NoteMessage> m_Queue;
 };
 
-// We allow for a note to hold on for 0.2 sec after release at which
+// We allow for a note to hold on for 1.0 sec after release at which
 // point it will be deleted.
-const unsigned State::m_DecayTimeInSamples = unsigned(0.2f * c_SampleRate);
+const unsigned State::m_DecayTimeInSamples = unsigned(1.0f * c_SampleRate);
 
 /////////////////////////////////////////////////////////////////////
 /// \brief The Hardware::HardwareImpl class

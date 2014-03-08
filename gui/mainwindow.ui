@@ -1136,7 +1136,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_Fs">
@@ -1152,7 +1152,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1187,7 +1187,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_Ds">
@@ -1203,7 +1203,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1238,7 +1238,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_D">
@@ -1254,7 +1254,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1289,7 +1289,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_E">
@@ -1305,7 +1305,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1340,7 +1340,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_Cs">
@@ -1352,11 +1352,14 @@
            <height>61</height>
           </rect>
          </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
          <property name="maximum">
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1391,7 +1394,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_G">
@@ -1407,7 +1410,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1442,7 +1445,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_B">
@@ -1458,7 +1461,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1493,7 +1496,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_A">
@@ -1509,7 +1512,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1544,7 +1547,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_F">
@@ -1560,7 +1563,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1595,7 +1598,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_Gs">
@@ -1611,7 +1614,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1646,7 +1649,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_C">
@@ -1658,11 +1661,14 @@
            <height>61</height>
           </rect>
          </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
          <property name="maximum">
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1697,7 +1703,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>5.0</string>
+          <string>1</string>
          </property>
         </widget>
         <widget class="QSlider" name="verticalSlider_Volume_As">
@@ -1713,7 +1719,7 @@
           <number>10</number>
          </property>
          <property name="value">
-          <number>5</number>
+          <number>1</number>
          </property>
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2342,6 +2348,390 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>lineEdit_Volume_C</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>674</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>33</x>
+     <y>193</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_Cs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>669</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>27</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_D</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>672</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>197</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_Ds</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>671</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>205</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_E</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>268</x>
+     <y>664</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>106</x>
+     <y>187</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_F</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>673</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>57</x>
+     <y>232</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_Fs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>385</x>
+     <y>678</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>99</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_G</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>431</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>44</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_Gs</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>484</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>466</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_A</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>560</x>
+     <y>670</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>497</x>
+     <y>178</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_As</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>609</x>
+     <y>667</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>515</x>
+     <y>185</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEdit_Volume_B</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeLineEdit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>657</x>
+     <y>677</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>528</x>
+     <y>159</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_C</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>44</x>
+     <y>617</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>319</x>
+     <y>144</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_Cs</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>95</x>
+     <y>624</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>354</x>
+     <y>155</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_D</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>148</x>
+     <y>626</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>465</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_Ds</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>618</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>147</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_E</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>261</x>
+     <y>618</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>564</x>
+     <y>166</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_F</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>622</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>584</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_Fs</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>380</x>
+     <y>620</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>671</x>
+     <y>145</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_G</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>443</x>
+     <y>625</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>697</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_Gs</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>503</x>
+     <y>623</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>696</x>
+     <y>204</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_A</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>542</x>
+     <y>625</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>694</x>
+     <y>238</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_As</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>599</x>
+     <y>624</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>699</x>
+     <y>271</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>verticalSlider_Volume_B</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>SetVolumeSlider(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>671</x>
+     <y>617</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>696</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>SetClarinetVoice()</slot>
@@ -2358,5 +2748,7 @@
   <slot>SetReferencePitch()</slot>
   <slot>SetCentDeltas()</slot>
   <slot>SetCentDeltaText(int)</slot>
+  <slot>SetVolumeLineEdit()</slot>
+  <slot>SetVolumeSlider(int)</slot>
  </slots>
 </ui>
