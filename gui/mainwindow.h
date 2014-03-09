@@ -47,6 +47,7 @@ private slots:
   void SetCentDeltaText(int value);
   void SetVolumeLineEdit();
   void SetVolumeSlider(int value);
+  void SetAllCentsFromTemperament();
 };
 
 #endif // MAINWINDOW_H

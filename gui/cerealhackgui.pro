@@ -11,7 +11,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = cerealhackgui
+TARGET = "Intonation Station"
 TEMPLATE = app
 
 STK_PATH        = ../stk-4.4.4/
@@ -36,6 +36,8 @@ CONFIG += c++11
 #USE_ASIO = 1
 
 win {
+    RC_FILE = IntonationStation.rc
+
     # CH_FIXME: look into gettimeofday() equivalent for windows
     DEFINES += __WINDOWS_DS__
     DEFINES += __WINDOWS_MM__

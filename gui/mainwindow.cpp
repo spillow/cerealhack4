@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <algorithm>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -19,6 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->radio_clarinet_select->setChecked(true);
     ui->radio_transpose_c->setChecked(true);
     ui->checkbox_hold_notes->setChecked(false);
+    ui->radioButton_Equal->setChecked(true);
+    ui->lineEdit_reference_pitch->setText(QString::number(440));
+    ui->radioButton_Key_C->setChecked(true);
 
     m_ControllerTimer.start(1);
 }
@@ -123,6 +128,81 @@ static float clamp(float val, float max, float min)
 }
 
 #define ArraySize(x) (sizeof(x) / sizeof(x[0]))
+
+void MainWindow::SetAllCentsFromTemperament()
+{
+    QRadioButton *intonationButtons[] = {
+        ui->radioButton_Equal,
+        ui->radioButton_Pure_Major,
+        ui->radioButton_Pure_Minor
+    };
+
+    // cent deltas in the order of the above buttons
+    float centDeltas[][12] = {
+        { 0.f,      0.f,   0.f,   0.f,    0.f,   0.f,    0.f,   0.f,    0.f,    0.f,   0.f,    0.f },
+        { 0.f,   -29.3f,  3.9f, 15.6f, -13.7f, -2.0f, -31.3f,  2.0f, -27.4f, -15.6f, 17.6f, -11.7f },
+        //{ 15.6f, -13.7f, -2.0f, 31.3f,   2.0f, 13.7f, -15.6f, 17.6f, -11.7f,   0.0f, 33.2f,   3.9f }
+        { 0.f,    33.2f,  3.9f, 15.6f, -13.7f, -2.0f,  31.3f,  2.0f,  13.7f, -15.6f, 17.6f, -11.7f }
+    };
+
+    QRadioButton *keyButtons[] = {
+        ui->radioButton_Key_C,
+        ui->radioButton_Key_Cs,
+        ui->radioButton_Key_D,
+        ui->radioButton_Key_Ds,
+        ui->radioButton_Key_E,
+        ui->radioButton_Key_F,
+        ui->radioButton_Key_Fs,
+        ui->radioButton_Key_G,
+        ui->radioButton_Key_Gs,
+        ui->radioButton_Key_A,
+        ui->radioButton_Key_As,
+        ui->radioButton_Key_B
+    };
+
+    QSlider* verticalSliders[] = {
+        ui->verticalSlider_Pitch_C,
+        ui->verticalSlider_Pitch_Cs,
+        ui->verticalSlider_Pitch_D,
+        ui->verticalSlider_Pitch_Ds,
+        ui->verticalSlider_Pitch_E,
+        ui->verticalSlider_Pitch_F,
+        ui->verticalSlider_Pitch_Fs,
+        ui->verticalSlider_Pitch_G,
+        ui->verticalSlider_Pitch_Gs,
+        ui->verticalSlider_Pitch_A,
+        ui->verticalSlider_Pitch_As,
+        ui->verticalSlider_Pitch_B
+    };
+
+    unsigned temperamentMode = 0;
+    for (unsigned i=0; i < ArraySize(intonationButtons); i++) {
+        if (intonationButtons[i]->isChecked()) {
+            temperamentMode = i;
+            break;
+        }
+    }
+
+    unsigned key = 0;
+    for (unsigned i=0; i < ArraySize(keyButtons); i++) {
+        if (keyButtons[i]->isChecked()) {
+            key = i;
+            break;
+        }
+    }
+
+    std::vector<float> deltas(centDeltas[temperamentMode], centDeltas[temperamentMode] + 12);
+
+    if (key != 0) {
+        std::rotate(deltas.begin(), deltas.begin() + 12 - key, deltas.end());
+    }
+
+    for (unsigned i=0; i < ArraySize(verticalSliders); i++) {
+        verticalSliders[i]->setValue(int(deltas[i] * 10.0f)); // scale it; sliders only take ints
+    }
+
+    SetCentDeltaText(0);
+}
 
 void MainWindow::SetCentDeltaText(int /*value*/)
 {
