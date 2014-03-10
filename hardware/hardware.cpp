@@ -19,6 +19,7 @@
 #include <assert.h>
 #include <map>
 #include <list>
+#include <functional>
 
 using namespace stk;
 
@@ -68,7 +69,7 @@ struct State
 {
     static const unsigned m_DecayTimeInSamples;
     StatesType m_InstrumentStates;
-    ConcurrentQueue<NoteMessage> m_Queue;
+    ConcurrentQueue<std::function<void()> > m_Queue;
 };
 
 // We allow for a note to hold on for 1.0 sec after release at which
@@ -133,24 +134,15 @@ static int tick(void *outputBuffer,
     State *currState = static_cast<State*>(userState);
     StkFloat *out = static_cast<StkFloat*>(outputBuffer);
 
-    StatesType &instrumentMap = currState->m_InstrumentStates;
-
     // read from the message queue to determine if the
     // controller has requested a change in the state
     // of the hardware.
     while (!currState->m_Queue.empty()) {
-        NoteMessage msg = currState->m_Queue.pop();
-
-        if (msg.turnOn) {
-            assert(instrumentMap.find(msg.instrument) == instrumentMap.end());
-            instrumentMap.insert(std::make_pair(msg.instrument, InstrumentState(msg.volumeScaler)));
-        }
-        else {
-            auto iter = instrumentMap.find(msg.instrument);
-            assert(iter != instrumentMap.end());
-            iter->second.m_Decaying = true;
-        }
+        auto thunk = currState->m_Queue.pop();
+        thunk();
     }
+
+    StatesType &instrumentMap = currState->m_InstrumentStates;
 
     // nBufferFrames is the number of samples that we need to
     // fill up.  We're currently sampling at 44100 samples/sec.
@@ -260,8 +252,14 @@ NoteId Hardware::HardwareImpl::NoteOn(Instrument instrument, float freq, float v
     // start the physical process.
     i->noteOn(freq, 0.1f); // default amplitude of all instruments.
 
+    auto thunk = [=]() {
+        StatesType &instrumentMap = m_State.m_InstrumentStates;
+        assert(instrumentMap.find(i) == instrumentMap.end());
+        instrumentMap.insert(std::make_pair(i, InstrumentState(volumeScaler)));
+    };
+
     // notify audio thread to pick new note up.
-    m_State.m_Queue.push(NoteMessage(true, i, volumeScaler));
+    m_State.m_Queue.push(thunk);
 
     // Send a pointer back to the caller of the generated object.
     // This is used as a unique tag to reference it for deletion
@@ -279,7 +277,15 @@ void Hardware::HardwareImpl::NoteOff(NoteId id)
     Instrmnt *instrument = reinterpret_cast<Instrmnt*>(id);
     //instrument->noteOff(0.003f); // TODO: how sharp?
     instrument->noteOff(0.4f * c_ONE_OVER_128); // TODO: how sharp?
-    m_State.m_Queue.push(NoteMessage(false, instrument, 0.0f));
+
+    auto thunk = [=]() {
+        StatesType &instrumentMap = m_State.m_InstrumentStates;
+        auto iter = instrumentMap.find(instrument);
+        assert(iter != instrumentMap.end());
+        iter->second.m_Decaying = true;
+    };
+
+    m_State.m_Queue.push(thunk);
 }
 
 /////////////////////////////////////////////////////////////////////
