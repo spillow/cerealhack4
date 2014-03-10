@@ -24,6 +24,8 @@ public:
     bool Initialize();
     NoteId NoteOn(Instrument instrument, float freq, float amplitude);
     void NoteOff(NoteId id);
+    void UpdateFrequency(NoteId id, float frequency);
+    void UpdateVolume(NoteId id, float scaler);
 private:
     Hardware(const Hardware&);
     Hardware& operator=(const Hardware&);

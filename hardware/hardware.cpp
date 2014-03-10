@@ -90,6 +90,8 @@ public:
     bool Initialize();
     NoteId NoteOn(Instrument i, float freq, float amplitude);
     void NoteOff(NoteId id);
+    void UpdateFrequency(NoteId id, float frequency);
+    void UpdateVolume(NoteId id, float scaler);
 };
 
 /////////////////////////////////////////////////////////////////////
@@ -205,6 +207,41 @@ NoteId Hardware::NoteOn(Instrument i, float freq, float volumeScaler)
 void Hardware::NoteOff(NoteId id)
 {
     return m_HardwareImpl->NoteOff(id);
+}
+
+void Hardware::UpdateFrequency(NoteId id, float frequency)
+{
+    return m_HardwareImpl->UpdateFrequency(id, frequency);
+}
+
+void Hardware::UpdateVolume(NoteId id, float scaler)
+{
+    return m_HardwareImpl->UpdateVolume(id, scaler);
+}
+
+void Hardware::HardwareImpl::UpdateFrequency(NoteId id, float frequency)
+{
+    auto thunk = [=]() {
+        Instrmnt *instrument = reinterpret_cast<Instrmnt*>(id);
+        instrument->setFrequency(frequency);
+    };
+
+    m_State.m_Queue.push(thunk);
+}
+
+void Hardware::HardwareImpl::UpdateVolume(NoteId id, float scaler)
+{
+    auto thunk = [=]() {
+        StatesType &instrumentMap = m_State.m_InstrumentStates;
+        Instrmnt *i = reinterpret_cast<Instrmnt*>(id);
+        auto iter = instrumentMap.find(i);
+        if (iter != instrumentMap.end()) {
+            InstrumentState &state = iter->second;
+            state.m_volumeScaler = scaler;
+        }
+    };
+
+    m_State.m_Queue.push(thunk);
 }
 
 /////////////////////////////////////////////////////////////////////

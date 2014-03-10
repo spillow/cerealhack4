@@ -8,7 +8,7 @@
 
 #include <functional>
 #include <map>
-#include <stack>
+#include <list>
 
 class Controller final
 {
@@ -47,7 +47,7 @@ private:
     std::vector<float> m_CentDeltasFromEqual;
     // same convention as m_CentDeltasFromEqual
     std::vector<float> m_NoteVolumeScaler;
-    typedef std::stack<NoteId> NoteCollection;
+    typedef std::list<NoteId> NoteCollection;
     // Notes currently making sound.
     std::map<unsigned, NoteCollection> m_RingingNotes;
     // Notes that are being held (no note off event yet)
@@ -55,6 +55,10 @@ private:
     ConcurrentQueue<std::function<void()> > m_MsgQueue;
     Hardware m_Hardware;
     MidiReceiver m_MidiReceiver;
+private:
+    void UpdateFrequencies();
+    void UpdateVolumes();
+    float CalculateFrequency(unsigned MIDINoteNumber, unsigned &noteIndex) const;
 private:
     Controller(const Controller &);
     Controller& operator=(const Controller&);

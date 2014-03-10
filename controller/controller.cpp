@@ -55,18 +55,24 @@ void Controller::Initialize(unsigned portNumber)
     m_MidiReceiver.Initialize(portNumber);
 }
 
+float Controller::CalculateFrequency(unsigned MIDINoteNumber, unsigned &noteIndex) const
+{
+    const float A4_Midi = 69.0f;
+    const int transposedNote = (int)MIDINoteNumber + m_TransposeAmount;
+    noteIndex = GetNoteIndex(transposedNote);
+    float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
+    frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
+
+    return frequency;
+}
+
 void Controller::NoteOn(unsigned noteNumber, unsigned velocity)
 {
     auto thunk = [=]() {
-        const float A4_Midi = 69.0f;
-        // TODO: what happens if we're in sustain and a note that is already
-        // sustained is hit again?
-        const int transposedNote = (int)noteNumber + m_TransposeAmount;
-        const unsigned noteIndex = GetNoteIndex(transposedNote);
-        float frequency = m_StandardPitchFreq * pow(2.0, ((float)transposedNote - A4_Midi) / 12.0f);
-        frequency *= pow(10.0, c_CentConstant * m_CentDeltasFromEqual[noteIndex]);
+        unsigned noteIndex = 0;
+        const float frequency = CalculateFrequency(noteNumber, noteIndex);
         NoteId noteId = m_Hardware.NoteOn(m_CurrVoice, frequency, m_NoteVolumeScaler[noteIndex]);
-        m_RingingNotes[noteNumber].push(noteId);
+        m_RingingNotes[noteNumber].push_back(noteId);
         m_PushedDownNotes[noteNumber]++;
     };
 
@@ -84,9 +90,9 @@ void Controller::NoteOff(unsigned noteNumber, unsigned velocity)
         if (!m_IsSustained) {
             auto &ringingNotes = m_RingingNotes[noteNumber];
             if (!ringingNotes.empty()) {
-                auto &noteId = ringingNotes.top();
-                ringingNotes.pop();
+                auto &noteId = ringingNotes.back();
                 m_Hardware.NoteOff(noteId);
+                ringingNotes.pop_back();
             }
         }
     };
@@ -123,12 +129,37 @@ void Controller::SetSustain(bool sustain)
     m_MsgQueue.push(thunk);
 }
 
+void Controller::UpdateFrequencies()
+{
+    for (auto &ringingNotes : m_RingingNotes) {
+        unsigned idx;
+        const float frequency = CalculateFrequency(ringingNotes.first, idx);
+        for (auto &note : ringingNotes.second) {
+            m_Hardware.UpdateFrequency(note, frequency);
+        }
+    }
+}
+
+void Controller::UpdateVolumes()
+{
+    for (auto &ringingNotes : m_RingingNotes) {
+        for (auto &note : ringingNotes.second) {
+            unsigned idx = 0;
+            CalculateFrequency(ringingNotes.first, idx);
+            float scaler = m_NoteVolumeScaler[idx];
+            m_Hardware.UpdateVolume(note, scaler);
+        }
+    }
+}
+
 void Controller::SetIntonation(float centDeltas[12])
 {
     auto thunk = [=]() {
         for (unsigned i=0; i < 12; i++) {
             m_CentDeltasFromEqual[i] = centDeltas[i];
         }
+
+        UpdateFrequencies();
     };
 
     m_MsgQueue.push(thunk);
@@ -140,6 +171,8 @@ void Controller::SetVolumes(float volumes[12])
         for (unsigned i=0; i < 12; i++) {
             m_NoteVolumeScaler[i] = volumes[i];
         }
+
+        UpdateVolumes();
     };
 
     m_MsgQueue.push(thunk);
@@ -149,6 +182,8 @@ void Controller::SetStandardPitch(float freq)
 {
     auto thunk = [=]() {
         m_StandardPitchFreq = freq;
+
+        UpdateFrequencies();
     };
 
     m_MsgQueue.push(thunk);
@@ -158,6 +193,8 @@ void Controller::SetTransposeAmount(int numSemitones)
 {
     auto thunk = [=]() {
         m_TransposeAmount = numSemitones;
+
+        UpdateFrequencies();
     };
 
     m_MsgQueue.push(thunk);
