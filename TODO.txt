@@ -1,0 +1,8 @@
+- Virtual MIDI
+- OSC Support?
+- sampled piano
+- computer keyboard support
+- ASIO
+- auto key detection
+- parameter fine tuning (volume, instrument params, etc.)
+
